@@ -2331,7 +2331,7 @@ func (cg *ConfigGenerator) generateScrapeConfig(
 		relabelings = append(relabelings, generateRelabelConfig(labeler.GetRelabelingConfigs(sc.TypeMeta, sc.ObjectMeta, sc.Spec.RelabelConfigs))...)
 	}
 
-	if sc.Spec.JobName != "" || sc.Spec.RelabelConfigs != nil {
+	if len(relabelings) > 0 {
 		cfg = append(cfg, yaml.MapItem{Key: "relabel_configs", Value: relabelings})
 	}
 
